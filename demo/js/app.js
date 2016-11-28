@@ -89,8 +89,9 @@ function poll() {
 			appendToResponseBox(url, "GET", JSON.stringify(response, null, 4));
 		});	
                     if(new Date().getTime() - startTime > 120000){
+					$("#qr-img").attr("src", "../demo/img/timeout.jpg");
                     clearInterval(clear);
-                    return;
+                    dfd.resolve();
                     }
 	}, 5000);
 
