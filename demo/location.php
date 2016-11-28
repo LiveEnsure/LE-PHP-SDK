@@ -130,11 +130,11 @@ $(document).ready(function() {
             google.maps.event.addListener(map, "click", function(e) { 
                 $("#lat").val(e.latLng.lat());
                 $("#long").val(e.latLng.lng());
-                $("#radius").val(2);
+                $("#radius").val(10);
             });
             $("#lat").val(p.coords.latitude);
             $("#long").val(p.coords.longitude);
-            $('#radius').val(2);
+            $('#radius').val(10);
         }, function() {
             var LatLng = new google.maps.LatLng('37.0902', '95.7129');
             var mapOptions = {

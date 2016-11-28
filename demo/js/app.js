@@ -70,6 +70,7 @@ function poll() {
 	var dfd = jQuery.Deferred();
 	// $("#result-img").attr("src", "/static/liveensuredemo/img/failure.png");
 	var url = "/host/session/" + localStorage.getItem("sessionToken") + "/" + agentId;
+        var startTime = new Date().getTime();
 	clear = setInterval(function(){
 		appendToRequestBox(url, "GET");
 		$.get(urls.pollStatus, {sessionToken: localStorage.getItem('sessionToken')}, function(response) {
@@ -87,6 +88,10 @@ function poll() {
 			} 
 			appendToResponseBox(url, "GET", JSON.stringify(response, null, 4));
 		});	
+                    if(new Date().getTime() - startTime > 120000){
+                    clearInterval(clear);
+                    return;
+                    }
 	}, 5000);
 
 	return dfd.promise();
