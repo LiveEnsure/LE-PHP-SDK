@@ -19,7 +19,11 @@
 	      <li><a href="device.php">Device</a></li>
 	      <li><a href="knowledge.php">Knowledge</a></li>
 	      <li  class="active"><a href="location.php">Location</a></li>
-	      <li><a href="behaviour.php">Behaviour</a></li>
+	      <!-- <li><a href="behaviour.php">Behaviour</a></li> -->
+        <li><a href="bio.php">Bio</a></li>
+        <li><a href="time.php">Time</a></li>
+        <li><a href= "behaviour_v6.php">Behaviour</a></li>
+
 	    </ul>
 	  </div>
 	</nav>
@@ -44,7 +48,13 @@
 	  		<input type="hidden" name="sessionToken" id="location-sessionToken"/>
 	    	<input name="lat" id="lat" class="form-control form-control-width" type="text" placeholder="lat" value="">
 	    	<input name="long" id="long" class="form-control form-control-width" type="text" placeholder="Long" value="">
-                <input name="selectedRadius" id="radius" type="hidden" >
+        <input name="selectedRadius" id="radius" type="hidden" >
+                <div class="row row-margin col-sm-12">
+                <input type="radio" id="in" name="inOut" value="true" checked>
+                <label for="in">In</label>
+                <input type="radio" id="out" name="inOut" value="false">
+                <label for="out">Out</label>
+                </div>
 	    	<button id="submit" class="btn btn-default pull-right btn-modified marginTop-20 marginRight-5">Login</button>
 	  	</div>
 	  </div>

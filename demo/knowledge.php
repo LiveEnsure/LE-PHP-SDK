@@ -14,7 +14,11 @@
 	      <li><a href="device.php">Device</a></li>
 	      <li  class="active"><a href="knowledge.php">Knowledge</a></li>
 	      <li><a href="location.php">Location</a></li>
-	      <li><a href="behaviour.php">Behaviour</a></li>
+	      <!-- <li><a href="behaviour.php">Behaviour</a></li> -->
+		  <li><a href="bio.php">Bio</a></li>
+		  <li><a href="time.php">Time</a></li>
+		  <li><a href= "behaviour_v6.php">Behaviour</a></li>
+
 	    </ul>
 	  </div>
 	</nav>

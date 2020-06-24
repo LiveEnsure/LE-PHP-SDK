@@ -83,6 +83,7 @@
             host: "",
             initSession: "/social/initSession",
             addPromptChallenge: "/live/add-prompt-challenge",
+            addTimeChallenge: "/live/add-time-challenge"
             addLocationChallenge: "/live/add-location-challenge",
             getCode: "/social/getCode",
             pollStatus: "/social/pollStatus",

@@ -29,6 +29,16 @@ function addPromptChallenge() { //alert('addprompt');
 	});	
 }
 
+
+function addTimeChallenge() { //alert('addprompt');
+	$("#time-sessionToken").val(localStorage.getItem('sessionToken'));
+	appendToRequestBox("/host/challenge", "PUT");
+	return $.post(urls.addTimeChallenge, $("#time-form").serialize(), function(response) {
+            console.log(response);
+		appendToResponseBox("/host/challenge", "PUT", JSON.stringify(response, null, 4));
+	});	
+}
+
 function addBehaviourChallenge() { //alert('touchChallenge');
 	$("#b-sessionToken").val(localStorage.getItem('sessionToken'));
 	$("#touches").val(touches.join(','));
@@ -38,6 +48,26 @@ function addBehaviourChallenge() { //alert('touchChallenge');
 		appendToResponseBox("/host/challenge", "PUT", JSON.stringify(response, null, 4));
 	});	
 }
+
+function addBehaviourV6Challenge() { //alert('touchChallenge');
+	$("#b-sessionToken").val(localStorage.getItem('sessionToken'));
+	appendToRequestBox("/host/challenge", "PUT");
+	return $.post(urls.addBehaviourV6Challenge, $("#behaviour-v6-form").serialize(), function(response) {
+            console.log(response);
+		appendToResponseBox("/host/challenge", "PUT", JSON.stringify(response, null, 4));
+	});	
+}
+
+function addBioChallenge() { //alert('bioChallenge');
+	$("#b-sessionToken").val(localStorage.getItem('sessionToken'));
+	appendToRequestBox("/host/challenge", "PUT");
+	return $.post(urls.addBioChallenge, $("#bio-form").serialize(), function(response) {
+            console.log(response);
+		appendToResponseBox("/host/challenge", "PUT", JSON.stringify(response, null, 4));
+	});	
+}
+
+
 
 function addLocationChallenge() { //alert('location');
 	$("#location-sessionToken").val(localStorage.getItem('sessionToken'));

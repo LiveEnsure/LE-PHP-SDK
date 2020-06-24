@@ -78,13 +78,16 @@ choose a challenge question and anwner/response. This is teeing up the API, as t
 end-user would not see this. Then click and scan, enter response to challenge
 in the device, to authenticate. 
 
-[3] To test location, click the [Location] challenge, enter email and click
+[3] To test location, click the [Location] challenge, enter email, IN/OUT and click
 the map to register your current lat/long. If you want location to pass,
-simply login, scan and pass location proximity test. If you want it to fail,
-drag the map to an alternate location, login and fail due to proximity difference.
+simply login select IN, scan and pass location proximity test. If you want it to fail,
+drag the map to an alternate location or select OUT, login and fail due to proximity difference.
 
-[4] To test behavior, click the [Behavior] tab and choose an orientation, and a 
-grid pattern (up to 2 places) for single or multi-touch on the device. 
+[4] To test behavior, click the [Behavior] tab and select 3 pattern vary from 1 to 9 for example ((1,1), (2, 2), (3,3)) and scan from  the device the screen will popup with the PAttern. 
+
+[5] To test bio, click the [Bio] and Login by entering Email after scanning the device's security PIN/Pattern/Face Detection/Fingerprint will appear. 
+
+[6] To test time, click the [Time] and Login by entering Email and enter the start date and end date with the hint Pattern and select IN or OUT, after scanning in case of IN if the time is in between the selected then will get PASS otherwise it will get FAIL, after scanning in case of OUT if the time is in between the selected then will get FAIL otherwise it will get PASS. 
 
 Click login and touch and hold the desired locations AS YOU SCAN, until it beeps. 
 To fail, tap wrong locations on the screen or release before you scan. 
@@ -152,24 +155,37 @@ Add location challenge:
 
 # lat is lattitude of location
 # lang is the langitude of the location
+# inOut is the In between or Out of the location
 # radius is the radius limit of location authentication
 
-$rs =  $obj->addLocationChallenge($_REQUEST['lat'],$_REQUEST['long'],$_REQUEST['selectedRadius'],$token);
+$rs =  $obj->addLocationChallenge($_REQUEST['lat'],$_REQUEST['long'],$_REQUEST['selectedRadius'],$_REQUEST['inOut'],$token);
  ```
 
           
 ```
  Add behaviour challenge:
-    # orientation is the orientation of mobile phone used to scan the 
-    # code. It can have 4 values range from 0 to 3
-    # 0 -> Portrait
-    # 1 -> Upside down
-    # 2 -> Landscape Left
-    # 3 -> Landscape Right
     
-    # touches number of touch points up to 6
-    $rs =  $obj->addTouchChallenge($_REQUEST['orientation'],$_REQUEST['touches'],$token);
+    # touches the pattern to be drawn similar ((1,1), (2,2), (3,3))
+    $rs =  $obj->addTouchV6Challenge($_REQUEST['touches'],$token);
 ```
+
+```
+ Add Bio challenge:
+    
+    # touches this will be true to enable this challenge
+    $rs =  $obj->addBioChallenge($_REQUEST['touches'],$token);
+```
+
+```
+ Add Time challenge:
+    # startDate is date and time from what challenge to be enabled
+    # inOut is the if IN between start date and end date and if OUT when time has been completed in between start and end date
+    # endDate is date and time till what the challenge will be completed
+   
+    $rs =   $obj->addTimeChallenge($_REQUEST['startDate'],$_REQUEST['inOut'],$_REQUEST['endDate'],$token);
+```
+
+
 - Get the session token (required)
 ```
  $rs =  $obj->getAuthObj("IMG",$token);

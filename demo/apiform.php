@@ -17,18 +17,29 @@ if($method == 'add-prompt-challenge'){
     $rs =  $obj->addPromptChallenge($_REQUEST['question'],$_REQUEST['answer'],$token);
     header('Content-Type: application/json');
     echo json_encode($rs);
-  
-    
-}
+  }
+
+//   "TIME":{"endDate":"2020-06-09 03:53 PM","inout":"TRUE","required":"false","startDate":"2020-06-09 03:50 PM"}},
+
+
+if($method == 'add-time-challenge'){
+    $obj = new LiveEnsureApi();
+    $token = $_REQUEST['sessionToken'];
+    $rs =  $obj->addTimeChallenge($_REQUEST['startDate'],$_REQUEST['inout'],$_REQUEST['endDate'],$token);
+    header('Content-Type: application/json');
+    echo json_encode($rs);
+  }
+
+
 
 if($method == 'add-location-challenge'){
     $obj = new LiveEnsureApi();
     $token = $_REQUEST['sessionToken'];
-    $rs =  $obj->addLocationChallenge($_REQUEST['lat'],$_REQUEST['long'],$_REQUEST['selectedRadius'],$token);
+    $rs =  $obj->addLocationChallenge($_REQUEST['lat'],$_REQUEST['long'],$_REQUEST['selectedRadius'],$_REQUEST['inout'],$token);
     header('Content-Type: application/json');
     echo json_encode($rs);
     
-    
+       
 }
 
 if($method == 'add-behaviour-challenge'){
@@ -37,7 +48,15 @@ if($method == 'add-behaviour-challenge'){
     $rs =  $obj->addTouchChallenge($_REQUEST['orientation'],$_REQUEST['touches'],$token);
     header('Content-Type: application/json');
     echo json_encode($rs);
-   
+    
+}
+
+if($method == 'add-behaviour-v6-challenge'){
+    $obj = new LiveEnsureApi();
+    $token = $_REQUEST['sessionToken'];
+    $rs =  $obj->addTouchV6Challenge($_REQUEST['touches'],$token);
+    header('Content-Type: application/json');
+    echo json_encode($rs);
     
 }
 

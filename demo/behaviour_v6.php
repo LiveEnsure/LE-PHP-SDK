@@ -26,10 +26,10 @@
 	      <li><a href="device.php">Device</a></li>
 	      <li><a href="knowledge.php">Knowledge</a></li>
 	      <li><a href="location.php">Location</a></li>
-	      <!-- <li  class="active"><a href="behaviour.php">Behaviour</a></li> -->
+          <!-- <li><a href="behaviour.php">Behaviour</a></li> -->
 		  <li><a href="bio.php">Bio</a></li>
 		  <li><a href="time.php">Time</a></li>
-		  <li><a href= "behaviour_v6.php">Behaviour</a></li>
+	      <li  class="active"><a href="behaviour_v6.php">Behaviour</a></li>
 
 	    </ul>
 	  </div>
@@ -48,47 +48,21 @@
 	  </div>
 	  </div>
 	  </form>
-	  <form id="behaviour-form">
+	  <form id="behaviour-v6-form">
 		<div class="form-group form-group-modified">
 			<div class="row">
-				<div class="col-sm-12">
-					<label for="orientation1">2. Select orientation</label>
-				    	<select class="form-control" name="orientation" id="orientation1">
-				    		<option value=0>Portrait</option>
-				    		<option value=1>Upside down</option>
-				    		<option value=2>Landscape Left</option>
-				    		<option value=3>Landscape Right</option>
-				    	</select>
-				</div>
-				
-				<input type="hidden" name="touches" id="touches"/>
-				<input type="hidden" name="sessionToken" id="b-sessionToken"/>
+                <div class="col-sm-12">
+                    <input type="hidden" name="sessionToken" id="b-sessionToken"/>
+                    <label for="" style="margin-top: 10px">2. Touch points</label>
+                    <input name="touches" id="touches" class="form-control form-control-width" type="text" placeholder="(1,9),(8,8),(7,3)" value="">
 
-				<div class="col-sm-12">
-					<label for="" style="margin-top: 10px">3. Touch points</label>
-					<div class="row">
-					<div class="col-sm-12" id="portrait">
-						<table class="table table-bordered">
-							<tr><td>1</td><td>2</td></tr>
-							<tr><td>3</td><td>4</td></tr>
-							<tr><td>5</td><td>6</td></tr>
-							
-						</table>
-					</div>
-					<div class="col-sm-5" id="landscape">
-						<table class="table table-bordered">
-							<tr><td>1</td><td>2</td><td>3</td></tr>
-							<tr><td>4</td><td>5</td><td>6</td></tr>
-						</table>
-					</div>
-					</div>
-				</div>
-			</div>
+                </div>
+            </div>
 			<div class="row">
-			  	<div class="col-sm-12">
+			<div class="col-sm-12">
 			  	<button id="submit" class="btn btn-default pull-right btn-modified marginTop-20">Login</button>
-			  	</div>
-			  </div>
+			</div>
+			</div>
 		</div>
 	</form>
         </div>
@@ -132,35 +106,13 @@
     </form>
     </div>
     <div class="row marginLeft-Right-0">
-        <script>
-		var touches = [];
+    <script>
 		$(document).ready(function() {
 
 			$("#submit").click(function(e) {
 				e.preventDefault();
-				makeInitSessionCall().then(addBehaviourChallenge).then(getQRCode).then(poll);
+				makeInitSessionCall().then(addBehaviourV6Challenge).then(getQRCode).then(poll);
 			});
-			$("table td").click(function() {
-				if($(this).hasClass('clicked')) {
-					touches.splice(touches.indexOf($(this).text()),1);
-					$(this).removeClass("clicked");
-				}else {
-					$(this).addClass("clicked");
-					touches.push($(this).text());
-				}
-				console.log(touches);
-			});
-			$("#landscape").hide();
-			$("#orientation1").change(function() {
-				var val = $(this).val();
-				if(val <= 1) {
-					$("#portrait").show();
-					$("#landscape").hide();
-				} else {
-					$("#portrait").hide();
-					$("#landscape").show();
-				}
-			})
 		});
 	</script>
 <?php include('layout/footer.php');?>

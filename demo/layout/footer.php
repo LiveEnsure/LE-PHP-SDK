@@ -16,8 +16,11 @@
             host: "172.29.19.122",
             initSession: "/liveensure/sdk/apiclass.php?submit=init-session",
             addPromptChallenge: "/liveensure/sdk/apiclass.php?submit=add-prompt-challenge",
+            addTimeChallenge: "/liveensure/sdk/apiclass.php?submit=add-time-challenge",
             addBehaviourChallenge: "/liveensure/sdk/apiclass.php?submit=add-behaviour-challenge",
+            addBehaviourV6Challenge: "/liveensure/sdk/apiclass.php?submit=add-behaviour-v6-challenge",
             addLocationChallenge: "/liveensure/sdk/apiclass.php?submit=add-location-challenge",
+            addBioChallenge: "/liveensure/sdk/apiclass.php?submit=add-bio-challenge",
             getCode: "/liveensure/sdk/apiclass.php?submit=get-code",
             pollStatus: "/liveensure/sdk/apiclass.php?submit=poll-status",
         };

@@ -62,7 +62,9 @@ class LiveEnsureApi
          
         return $result;
 }
-   /*Function to perform Knowledge challenge*/
+   
+
+/*Function to perform Knowledge challenge*/
    public function addPromptChallenge($question, $answer, $sessionToken){
         $type = "PROMPT";             # Required
         $required = "true";           # Required
@@ -75,7 +77,7 @@ class LiveEnsureApi
                    "required"           => $required, 
                    "fallbackChallengeID"=> $fallback, 
                    "maximumAttempts"    => $maxAt
-   );
+        );
                 
         $data = array(
                 'sessionToken'     => $sessionToken, 
@@ -86,11 +88,65 @@ class LiveEnsureApi
 
                 $url = $this->leHostUrl."/host/challenge";
                 $result = $this->curl_json($url,'PUT',$data);  
-                $result['userId'] = $userId;
+                // $result['userId'] = $userId;
+                 return $result;
+   }
+
+
+   /*Function to perform Knowledge challenge*/
+   public function addTimeChallenge($startDate, $inout, $endDate, $sessionToken){
+    $type = "TIME";             # Required
+    $required = "true";           # Required
+    $fallback = "0";              # Required
+    $maxAt = "1";                 # Required
+
+    $details = array(
+               "endDate"           => $endDate,
+               "startDate"         => $startDate,
+               "inout"             => $inout, 
+               "required"           => $required, 
+               "fallbackChallengeID"=> $fallback, 
+               "maximumAttempts"    => $maxAt
+    );
+            
+    $data = array(
+            'sessionToken'     => $sessionToken, 
+            'challengeType'    => $type, 
+            'agentId'          => $this->agentId, 
+            'challengeDetails' => $details 
+            );
+
+            $url = $this->leHostUrl."/host/challenge";
+            $result = $this->curl_json($url,'PUT',$data);  
+            // $result['userId'] = $userId;
+             return $result;
+}
+   
+   
+   /* Function to perform Bio Challenge*/   
+     public function addBioChallenge($touches, $sessionToken){
+
+        $type = "BIOMETRIC";      # Required
+        $required = "true";  
+
+        $details = array(
+                   "touches"             => $touches,
+                   "required"            => $required               );
+                
+        $data = array(
+                'sessionToken'     => $sessionToken, 
+                'challengeType'    => $type, 
+                'agentId'          => $this->agentId, 
+                'challengeDetails' => $details 
+                );
+        
+                $url = $this->leHostUrl."/host/challenge";
+                $result = $this->curl_json($url,'PUT',$data);  
+            
                  return $result;
    }
    
-     /*Function to perform Behaviour Challenge*/
+    /*Function to perform Behaviour Challenge*/
    public function addTouchChallenge($orientation, $touches, $sessionToken){
 
         $type = "HOST_BEHAVIOR";      # Required
@@ -121,11 +177,41 @@ class LiveEnsureApi
             
                  return $result;
    }
+
+    /*Function to perform Behaviour v6 Challenge*/
+    public function addTouchV6Challenge($touches, $sessionToken){
+
+        $type = "HOST_BEHAVIOR_V6";      # Required
+        $required = "true";           # Required
+        $fallback = "0";              # Required
+        $maxAt = "1";                 # Max retries
+
+        $details = array(
+                  
+                   "touches"             => $touches, 
+                //    "regionCount"         => $regionCount,
+                   "required"            => $required, 
+                   "fallbackChallengeID" => $fallback, 
+                   "maximumAttempts"     => $maxAt
+                   );
+                
+        $data = array(
+                'sessionToken'     => $sessionToken, 
+                'challengeType'    => $type, 
+                'agentId'          => $this->agentId, 
+                'challengeDetails' => $details 
+                );
+        
+                $url = $this->leHostUrl."/host/challenge";
+                $result = $this->curl_json($url,'PUT',$data);  
+            
+                 return $result;
+   }
    
    /*Function to perform location challenge*/
-   public function addLocationChallenge($latitude, $longitude, $radius, $sessionToken){
+   public function addLocationChallenge($latitude, $longitude, $radius, $inout, $sessionToken){
 
-        $type = "LAT_LONG";      # Required
+        $type = "LAT_LONG_V6";      # Required
         $required = "true";       # Required
         $fallback = "0";          # If fail, other challenge
         $maxAt = "1";             # Retries
@@ -134,6 +220,7 @@ class LiveEnsureApi
                    "latitude"            => $latitude,
                    "longitude"           => $longitude, 
                    "radius"              => $radius,
+                   "inout"              => $inout,
                    "required"            => $required, 
                    "fallbackChallengeID" => $fallback, 
                    "maximumAttempts"     => $maxAt
@@ -148,10 +235,10 @@ class LiveEnsureApi
 
                 $url = $this->leHostUrl."/host/challenge";
                 $result = $this->curl_json($url,'PUT',$data);  
-                $result['userId'] = $userId;
+                // $result['userId'] = $userId;
                  return $result;
    }
-   
+
    /*Function to authenticate session token*/
    public function getAuthObj($type, $sessionToken){
         if ($sessionToken == "ERROR"){
@@ -181,6 +268,7 @@ class LiveEnsureApi
             return "NOTOKEN";
         }
    }
+
    /*Function to peform polling*/
    public function pollStatus($sessionToken){
         if ($sessionToken == "ERROR"){
